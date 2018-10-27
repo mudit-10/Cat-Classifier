@@ -63,3 +63,22 @@ mean_error = np.mean ( abs_error )
 
 # Appending format to a string means fill in that value with numbers in append
 print("Test Accuracy: {} %".format(100 * (1 - mean_error)) )
+
+#Checking for own image
+import scipy
+#from PIL import Image
+from scipy import ndimage
+
+my_image_filename = "cat.png"   # change this to the name of your image file 
+
+# We preprocess the image to fit the LR algorithm.
+fname = "/home/mudit/ML_Projects/Cat_Detection/" + my_image_filename
+image = np.array(scipy.ndimage.imread(fname, flatten=False, mode = 'RGB'))
+my_image = scipy.misc.imresize(image, size=(num_px,num_px)).reshape((1, num_px*num_px*3)).T
+
+my_predicted_image = lr.predict(my_image.T)
+
+# plt.imshow(image)
+print("y = " + str(np.squeeze(my_predicted_image)) + ", the algorithm predicts a \"" + classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
+
+
